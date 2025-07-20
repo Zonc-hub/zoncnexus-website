@@ -1,0 +1,36 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+
+// 1. getStaticPaths: ဘယ် page တွေကို generate လုပ်ရမလဲဆိုတာ Astro ကိုပြောပြခြင်း
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("blog"); // 'blog' collection ထဲက post အားလုံးကို ယူပါ
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+
+// 2. Post data ကို props ကနေ လက်ခံခြင်း
+const { post } = Astro.props;
+const { Content } = await post.render(); // Markdown content ကို HTML အဖြစ် render လုပ်ခြင်း
+---
+
+<!-- 3. Page Layout ကို တည်ဆောက်ခြင်း -->
+<Layout title={post.data.title}>
+  <h1>{post.data.title}</h1>
+  <p>
+    Published on: {post.data.pubDate.toString().slice(0, 10)} by {
+      post.data.author
+    }
+  </p>
+  <hr />
+
+  <!-- Post content ကို ဒီနေရာမှာ ပြသခြင်း -->
+  <Content />
+</Layout>

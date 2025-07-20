@@ -1,11 +1,27 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// src/pages/index.astro
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Welcome to Zonc Nexus">
+  <section class="hero">
+    <h1>
+      Zonc Nexus မှ အခမဲ့ tools နှင့် အတွေးအမြင်များကို ရယူပြီး သင်၏
+      စိတ်ပိုင်းဆိုင်ရာနှင့် နည်းပညာစွမ်းရည်ကို Version မြှင့်တင်ပါ။
+    </h1>
+    <a href="/blog" class="cta-button">ဘလော့ဂ်သို့ သွားရန်</a>
+  </section>
+
+  <!-- အောက်က code block အသစ်တစ်ခုလုံးကို ဒီနေရာမှာ ထည့်လိုက်ပါ -->
+  <section class="latest-posts">
+    <h2>နောက်ဆုံးတင်ထားသော ပို့စ်</h2>
+    <article>
+      <h3><a>ကျွန်တော်၏ ပထမဆုံး Blog Post (Placeholder)</a></h3>
+      <p>
+        ဤနေရာသည် နောက်ဆုံးတင်ထားသော ဘလော့ဂ်ပို့စ်၏ အကျဉ်းချုပ် ဖော်ပြရန်နေရာ
+        ဖြစ်ပါသည်။ တကယ့်ပို့စ်များ ရေးသားတင်သည့်အခါ ဤနေရာတွင် အလိုအလျောက်
+        ပေါ်လာပါမည်။
+      </p>
+    </article>
+  </section>
 </Layout>

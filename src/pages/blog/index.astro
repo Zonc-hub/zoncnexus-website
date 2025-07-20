@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+// နည်းလမ်းအဟောင်း Astro.glob() အစား getCollection ကိုသုံးပါမယ်
+import { getCollection } from 'astro:content';
+
+// 'blog' collection ထဲက post အားလုံးကို ယူပြီး ရက်စွဲအလိုက် အသစ်ကနေအဟောင်း စီပါမယ်
+const allPosts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout title="Zonc Nexus Blog">
+  <h1>ကျွန်တော်၏ ဘလော့ဂ်</h1>
+  <p>ဒီနေရာမှာ ကျွန်တော်ရဲ့ အတွေးအမြင်တွေ၊ project တွေနဲ့ သင်ယူမှု ခရီးလမ်းကို မျှဝေသွားမှာပါ။</p>
+
+  <ul>
+    {allPosts.map((post) => (
+      <li>
+        <!-- 
+          အရေးအကြီးဆုံး ပြင်ဆင်မှုက ဒီနေရာမှာပါ။
+          မှန်ကန်တဲ့ link ကို `/blog/` နောက်မှာ post ရဲ့ slug ကိုထည့်ပြီး တည်ဆောက်ပါမယ်။ 
+        -->
+        <a href={`/blog/${post.slug}/`}>
+          <h3>{post.data.title}</h3>
+          <p>
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toString().slice(0, 10)}
+            </time>
+          </p>
+          <p>{post.data.description}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+</Layout>

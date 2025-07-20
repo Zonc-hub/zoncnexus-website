@@ -1,0 +1,19 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <p>© {currentYear} Zonc Nexus. All rights reserved.</p>
+  <!-- Social media links တွေကို နောက်ပိုင်းမှာ ဒီနေရာမှာ ထည့်ပါမယ် -->
+</footer>
+
+<style>
+  /* ရိုးရှင်းတဲ့ styling နည်းနည်းထည့်ရအောင် */
+  footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+  }
+</style>
