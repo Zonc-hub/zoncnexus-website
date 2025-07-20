@@ -9,13 +9,13 @@ import Layout from "../layouts/Layout.astro";
       Zonc Nexus မှ အခမဲ့ tools နှင့် အတွေးအမြင်များကို ရယူပြီး သင်၏
       စိတ်ပိုင်းဆိုင်ရာနှင့် နည်းပညာစွမ်းရည်ကို Version မြှင့်တင်ပါ။
     </h1>
-    <a href="/blog" class="cta-button">ဘလော့ဂ်သို့ သွားရန်</a>
+    <a href="/blog" class="cta-button">ဘလော့ဂ်မှ လေ့လာရန်</a>
   </section>
 
-  <!-- အောက်က code block အသစ်တစ်ခုလုံးကို ဒီနေရာမှာ ထည့်လိုက်ပါ -->
   <section class="latest-posts">
     <h2>နောက်ဆုံးတင်ထားသော ပို့စ်</h2>
     <article>
+      <!-- ဒီအပိုင်းကို နောက်ပိုင်းမှာ Blog Index Page လိုမျိုး dynamic ဖြစ်အောင် ပြောင်းပါမယ် -->
       <h3><a>ကျွန်တော်၏ ပထမဆုံး Blog Post (Placeholder)</a></h3>
       <p>
         ဤနေရာသည် နောက်ဆုံးတင်ထားသော ဘလော့ဂ်ပို့စ်၏ အကျဉ်းချုပ် ဖော်ပြရန်နေရာ
@@ -25,3 +25,36 @@ import Layout from "../layouts/Layout.astro";
     </article>
   </section>
 </Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 4rem 0; /* အပေါ်အောက် နေရာပိုချဲ့လိုက်တယ် */
+  }
+
+  .hero h1 {
+    font-size: 3rem; /* ခေါင်းစဉ်ကို ပိုကြီးလိုက်တယ် */
+    max-width: 90%;
+    margin: 0 auto 2rem auto; /* အပေါ်၊ ဘေး၊ အောက် margin ချိန်ညှိတယ် */
+  }
+
+  .cta-button {
+    display: inline-block; /* ဒါမှ padding နဲ့ margin တွေ သုံးလို့ရမယ် */
+    background-color: var(--link-color);
+    color: var(--bg-color); /* စာလုံးအရောင်ကို နောက်ခံအရောင်နဲ့တူအောင်ထားတယ် */
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px; /* ခလုတ်ကို ဘေးมนလေးဖြစ်အောင်လုပ်တယ် */
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease; /* animation အတွက် */
+  }
+
+  .cta-button:hover {
+    transform: scale(1.05); /* ခလုတ်ပေါ်တင်လိုက်ရင် နည်းနည်းကြီးလာအောင် */
+  }
+
+  .latest-posts {
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+  }
+</style>

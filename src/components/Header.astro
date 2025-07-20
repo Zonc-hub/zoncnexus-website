@@ -1,15 +1,50 @@
 ---
 // src/components/Header.astro
-// ဒီ file မှာ ကျွန်တော်တို့ site ရဲ့ header အတွက် HTML တွေ ပါဝင်ပါတယ်။
-// ဒါကို စာမျက်နှာတိုင်းမှာ ပြန်သုံးလို့ရပါတယ်။
 ---
 
 <header>
   <nav>
-    <a href="/">Zonc Nexus</a>
+    <a href="/" class="brand">Zonc Nexus</a>
     <ul>
       <li><a href="/blog">Blog</a></li>
       <li><a href="/about">About</a></li>
     </ul>
   </nav>
 </header>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+  }
+
+  nav {
+    /* အရေးအကြီးဆုံးအပိုင်းက Flexbox ပါ */
+    display: flex; /* nav ထဲက item တွေကို တစ်တန်းတည်းထားပေးတယ် */
+    justify-content: space-between; /* item တွေကို ဘယ်နဲ့ညာ အစွန်ဆုံးကို ကပ်ပေးတယ် */
+    align-items: center; /* item တွေကို ဒေါင်လိုက် အလယ်တည့်တည့်မှာ ထားပေးတယ် */
+
+    /* Global style ထဲက layout ကိုပဲ ယူသုံးမယ် */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  ul {
+    display: flex; /* list item တွေကို တစ်တန်းတည်းထားပေးတယ် */
+    gap: 1rem; /* item တွေကြားမှာ နေရာနည်းနည်းခြားပေးတယ် */
+    margin: 0;
+    padding: 0;
+    list-style-type: none; /* အရှေ့က အစက်အလုံးလေးတွေကို ဖျောက်တယ် */
+  }
+
+  .brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  /* လင့်ခ်တွေကို သီးသန့်အရောင်မပေးတော့ဘဲ၊ global style ကိုပဲ ယူသုံးမယ် */
+  a:hover {
+    color: var(--text-color);
+  }
+</style>

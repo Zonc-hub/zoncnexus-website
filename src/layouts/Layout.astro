@@ -1,12 +1,16 @@
 ---
 // src/layouts/Layout.astro
+
+// Components တွေကို import လုပ်ခြင်း
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
+// Props တွေကို လက်ခံဖို့ interface သတ်မှတ်ခြင်း
 interface Props {
   title: string;
 }
 
+// Page ကနေ ပို့လိုက်တဲ့ title ကို လက်ခံရယူခြင်း
 const { title } = Astro.props;
 ---
 
@@ -14,13 +18,26 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <--- ဒီစာကြောင်းက အရေးအကြီးဆုံးပဲ -->
     <meta name="description" content="Zonc Nexus: Tech, Mind, & Meaning" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+
+    <!-- 
+      Font (Inter) နဲ့ Global Stylesheet ကို import လုပ်ခြင်း။
+      ဒီ code က website တစ်ခုလုံးရဲ့ ရုပ်ရည်ကို ထိန်းချုပ်ပါလိမ့်မယ်။
+    -->
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
   </head>
   <body>
+    <!-- 
+      Header နဲ့ Footer ကြားမှာရှိတဲ့ <main> ထဲကို 
+      စာမျက်နှာတစ်ခုချင်းစီရဲ့ content တွေက <slot /> ကနေတစ်ဆင့် ဝင်လာပါမယ်။
+    -->
     <Header />
     <main>
       <slot />

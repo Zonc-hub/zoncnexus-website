@@ -1,36 +1,101 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-// နည်းလမ်းအဟောင်း Astro.glob() အစား getCollection ကိုသုံးပါမယ်
-import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-// 'blog' collection ထဲက post အားလုံးကို ယူပြီး ရက်စွဲအလိုက် အသစ်ကနေအဟောင်း စီပါမယ်
-const allPosts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
 <Layout title="Zonc Nexus Blog">
-  <h1>ကျွန်တော်၏ ဘလော့ဂ်</h1>
-  <p>ဒီနေရာမှာ ကျွန်တော်ရဲ့ အတွေးအမြင်တွေ၊ project တွေနဲ့ သင်ယူမှု ခရီးလမ်းကို မျှဝေသွားမှာပါ။</p>
+  <div class="hero">
+    <h1>Blog</h1>
+    <p>
+      Tech, Mind, & Meaning အကြောင်း ကျွန်တော်၏ အတွေးအမြင်များနှင့်
+      သင်ယူမှုခရီးလမ်း။
+    </p>
+  </div>
 
-  <ul>
-    {allPosts.map((post) => (
-      <li>
-        <!-- 
-          အရေးအကြီးဆုံး ပြင်ဆင်မှုက ဒီနေရာမှာပါ။
-          မှန်ကန်တဲ့ link ကို `/blog/` နောက်မှာ post ရဲ့ slug ကိုထည့်ပြီး တည်ဆောက်ပါမယ်။ 
-        -->
-        <a href={`/blog/${post.slug}/`}>
-          <h3>{post.data.title}</h3>
-          <p>
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toString().slice(0, 10)}
-            </time>
-          </p>
-          <p>{post.data.description}</p>
-        </a>
-      </li>
-    ))}
+  <ul class="post-list">
+    {
+      allPosts.map((post) => (
+        <li class="post-card">
+          <a href={`/blog/${post.slug}/`}>
+            <div class="card-content">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+              <h3 class="title">{post.data.title}</h3>
+              <p class="description">{post.data.description}</p>
+            </div>
+          </a>
+        </li>
+      ))
+    }
   </ul>
-
 </Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .hero h1 {
+    font-size: var(--text-4xl);
+  }
+  .hero p {
+    color: var(--color-text);
+    font-size: var(--text-lg);
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid; /* Grid layout ကို သုံးပါမယ် */
+    gap: 2rem; /* ကတ်တွေကြားမှာ နေရာခြားမယ် */
+  }
+
+  .post-card {
+    background-color: #1f2937; /* A slightly lighter background for the card */
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden; /* This keeps the corners rounded */
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .post-card:hover {
+    transform: translateY(-5px); /* ကတ်ကို နည်းနည်းလေး အပေါ်ကြွလာစေမယ် */
+    border-color: var(--color-primary);
+  }
+
+  .post-card a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    padding: 1.5rem;
+  }
+
+  .card-content .title {
+    color: var(--color-heading);
+    margin: 0.5rem 0 0.5rem;
+    font-size: var(--text-2xl);
+  }
+
+  .card-content time {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .card-content .description {
+    color: var(--color-text);
+    margin: 0;
+  }
+</style>
